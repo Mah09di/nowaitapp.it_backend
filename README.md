@@ -1,87 +1,212 @@
-# 🛠 Installation
+# NowaitApp Backend
 
-### 1. Clone the repository
+**سامانه هوشمند مدیریت صف و نوبت‌دهی آنلاین**
+
+بخش Backend پروژه **NowaitApp**، یک سامانه هوشمند برای مدیریت صف، نوبت‌دهی آنلاین و پیگیری وضعیت مراجعه‌کنندگان است.
+
+این سامانه با استفاده از **Python، Django و Django REST Framework** توسعه داده شده و بستری یکپارچه برای مدیریت مراکز خدماتی، مراجعه‌کنندگان و فرآیند نوبت‌دهی فراهم می‌کند.
+
+---
+
+## معرفی پروژه
+
+هدف اصلی NowaitApp کاهش زمان انتظار، جلوگیری از ازدحام در مراکز خدماتی و تسهیل فرآیند مدیریت مراجعه‌کنندگان است.
+
+در این سامانه، مدیر یا مسئول مرکز خدماتی پس از ثبت‌نام، اطلاعات مرکز خود را ثبت کرده و می‌تواند شماره تلفن مراجعه‌کنندگان را در سیستم وارد کند.
+
+پس از ثبت شماره تلفن، یک لینک اختصاصی از طریق پیامک برای مراجعه‌کننده ارسال می‌شود. مراجعه‌کننده با ورود به این لینک می‌تواند وضعیت صف و اطلاعات مربوط به نوبت خود را به‌صورت آنلاین مشاهده کند؛ بدون اینکه نیاز باشد برای اطلاع از وضعیت نوبت، در محل مرکز حضور داشته باشد.
+
+### قابلیت‌های اصلی
+
+- مدیریت مراکز خدماتی
+- ثبت و مدیریت اطلاعات مراجعه‌کنندگان
+- مدیریت صف و فرآیند نوبت‌دهی
+- ارسال پیامک اطلاع‌رسانی به مراجعه‌کنندگان
+- ارائه RESTful API
+- سیستم احراز هویت مبتنی بر JWT
+- محدودسازی تعداد درخواست‌های API
+- مستندات تعاملی API با Swagger
+- پشتیبانی از پایگاه داده PostgreSQL
+
+---
+
+## فناوری‌ها و ابزارهای مورد استفاده
+
+| فناوری | کاربرد |
+|---|---|
+| Python | زبان اصلی توسعه Backend |
+| Django 5.2 | چارچوب اصلی توسعه سمت سرور |
+| Django REST Framework | طراحی و پیاده‌سازی REST API |
+| Simple JWT | احراز هویت و مدیریت توکن |
+| PostgreSQL | سیستم مدیریت پایگاه داده |
+| drf-yasg | مستندسازی API با Swagger |
+| django-environ | مدیریت متغیرهای محیطی |
+| django-cors-headers | مدیریت درخواست‌های Cross-Origin |
+| Requests | ارسال و دریافت درخواست‌های HTTP |
+| django-ratelimit | محدودسازی تعداد درخواست‌ها |
+
+---
+
+## راهنمای نصب و راه‌اندازی
+
+### پیش‌نیازها
+
+پیش از شروع نصب، اطمینان حاصل کنید ابزارهای زیر روی سیستم شما نصب شده باشند:
+
+- Python نسخه 3.11 یا بالاتر
+- pip
+- Git
+- PostgreSQL (در صورت استفاده از این پایگاه داده)
+
+### ۱. دریافت مخزن پروژه
+
+ابتدا مخزن پروژه را از GitHub دریافت کنید:
+
 ```bash
-cd your-repo-name
+git clone https://github.com/Mah09di/nowaitapp.it_backend.git
+
+cd nowaitapp.it_backend
 ```
 
-### 2. Create and activate virtual environment
+### ۲. ایجاد محیط مجازی
+
+برای جلوگیری از تداخل کتابخانه‌های پایتون، یک محیط مجازی ایجاد کنید:
+
 ```bash
 python -m venv venv
-source venv/bin/activate  # For Linux/Mac
-venv\Scripts\activate     # For Windows
 ```
-### 3. Install dependencies
+
+### ۳. فعال‌سازی محیط مجازی
+
+**در ویندوز (PowerShell):**
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+**در لینوکس و macOS:**
+
+```bash
+source venv/bin/activate
+```
+
+### ۴. به‌روزرسانی pip
+
+```bash
+python -m pip install --upgrade pip
+```
+
+### ۵. نصب وابستگی‌های پروژه
+
+تمام کتابخانه‌ها و وابستگی‌های موردنیاز از طریق فایل `requirements.txt` نصب می‌شوند:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Apply migrations
+### ۶. پیکربندی متغیرهای محیطی
+
+در مسیر اصلی پروژه، یک فایل با نام `.env` ایجاد کرده و تنظیمات موردنیاز را در آن قرار دهید.
+
+نمونه:
+
+```env
+SECRET_KEY=your-secret-key
+DEBUG=True
+```
+
+در صورت نیاز، اطلاعات اتصال به پایگاه داده و سایر تنظیمات پروژه را نیز مطابق پیکربندی Django اضافه کنید.
+
+**نکته امنیتی:** فایل `.env` شامل اطلاعات حساس پروژه است و نباید در مخزن عمومی GitHub قرار گیرد.
+
+### ۷. اجرای Migrationها
+
+برای ایجاد و اعمال تغییرات ساختار پایگاه داده، دستورات زیر را اجرا کنید:
+
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 5. Create a superuser
+### ۸. ایجاد حساب کاربری مدیر
+
+برای ایجاد حساب کاربری مدیر سیستم (Superuser)، دستور زیر را اجرا کنید:
+
 ```bash
 python manage.py createsuperuser
 ```
-### 1. Run the development server
+
+سپس اطلاعات موردنیاز شامل نام کاربری، ایمیل و رمز عبور را وارد کنید.
+
+### ۹. اجرای سرور توسعه
+
+برای راه‌اندازی سرور محلی Django دستور زیر را اجرا کنید:
+
 ```bash
 python manage.py runserver
 ```
-#### Then open your browser and go to:
-```bash
+
+پس از اجرای موفقیت‌آمیز سرور، پروژه از طریق آدرس زیر در دسترس خواهد بود:
+
+```text
+http://127.0.0.1:8000/
+```
+
+---
+
+## مستندات API
+
+برای مشاهده، بررسی و آزمایش Endpointهای پروژه، از مستندات تعاملی Swagger استفاده کنید.
+
+**آدرس Swagger UI:**
+
+```text
 http://127.0.0.1:8000/api/v1/swagger/
 ```
 
+از طریق این بخش می‌توانید:
+
+- فهرست APIهای پیاده‌سازی‌شده را مشاهده کنید.
+- ساختار درخواست‌ها و پاسخ‌ها را بررسی کنید.
+- پارامترهای موردنیاز هر Endpoint را مشاهده کنید.
+- درخواست‌های API را مستقیماً آزمایش کنید.
+
+---
+
+## ساختار پروژه
+
+ساختار کلی مخزن پروژه به‌صورت زیر در نظر گرفته شده است:
+
+```text
+nowaitapp.it_backend/
+│
+├── manage.py
+├── requirements.txt
+├── README.md
+├── .env
+│
+├── apps/
+│   ├── accounts/
+│   ├── centers/
+│   ├── visitors/
+│   └── ...
+│
+└── ...
+```
+
+*توجه: ساختار فوق صرفاً نمونه‌ای از چیدمان پروژه است و باید با ساختار واقعی پوشه‌ها و اپلیکیشن‌های پیاده‌سازی‌شده مطابقت داده شود.*
+
+---
 
 
+#
 
+## مجوز و مالکیت پروژه
 
+این پروژه در قالب سامانه نرم‌افزاری **NowaitApp** توسعه داده شده و نگهداری می‌شود.
 
+---
 
+**NowaitApp Backend**
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<<<<<<< HEAD
-=======
-
-# برای نصب روی لینکوس سرور میخوایم
-
-
-# آپدیت pip
-python -m pip install --upgrade pip
-
-# نصب پکیج‌ها
-pip install -r requirements.txt
-
-# یا نصب یک‌به‌یک
-pip install Django==5.2.7
-pip install djangorestframework==3.16.1
->>>>>>> develop
-pip install djangorestframework-simplejwt==5.5.1
-pip install drf-yasg==1.21.11
-pip install django-environ==0.12.0
-pip install requests==2.32.5
-pip install django-ratelimit==4.1.0
-pip install django-cors-headers==4.6.0
-<<<<<<< HEAD
-pip install psycopg2-binary==2.9.11# api_nowaitapp
-=======
-pip install psycopg2-binary==2.9.11
->>>>>>> develop
-# nowaitapp.it_backend
+*مدیریت هوشمند صف، مدیریت بهتر زمان*
