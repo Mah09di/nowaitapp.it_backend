@@ -1,0 +1,5 @@
+    "https://api.ghasedaksms.com/v2/send/verify",
+    "https://rest.ghasedaksms.com/v2/send/verify",
+    "http://api.ghasedaksms.com/v2/send/verify",
+    "https://gateway.ghasedak.me/rest/api/v1/send/verify",
+    "https://rest.ghasedak.me/v2/send/verify",
